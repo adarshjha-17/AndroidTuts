@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button trueBtn, wrongBtn;
     TextView questionTextView;
+    private int questionIndex;
+    private  int questionQuiz;
 
 //    This array is create for only use to structure and packaged data because we are not using database
 
@@ -39,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(),"True Clicked",Toast.LENGTH_SHORT).show();
+                checkAnswer(true);
+                updateQuestion();
             }
         };
 
@@ -48,10 +51,34 @@ public class MainActivity extends AppCompatActivity {
         wrongBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Wrong Clicked", Toast.LENGTH_SHORT).show();
+
+                checkAnswer(false);
+                updateQuestion();
             }
         });
 
 
+    }
+
+    private void updateQuestion(){
+
+        questionIndex = (questionIndex + 1) % quizQuestions.length;
+        questionQuiz = quizQuestions[questionIndex].getmQuestion();
+        questionTextView.setText(questionQuiz);
+
+    }
+
+
+    private void checkAnswer(boolean userGuess){
+
+        boolean correctAnswer = quizQuestions[questionIndex].ismAnswer();
+
+        if (correctAnswer == userGuess){
+
+            Toast.makeText(getApplicationContext(),R.string.correct_answer_toast,Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),R.string.wrong_answer_toast,Toast.LENGTH_SHORT).show();
+        }
     }
 }

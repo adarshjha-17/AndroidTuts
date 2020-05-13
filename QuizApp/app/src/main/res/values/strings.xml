@@ -1,4 +1,8 @@
 <resources>
+    <string name="correct_answer_toast">Great !</string>
+    <string name="wrong_answer_toast">Not Good !</string>
+
+
     <string name="app_name">Quiz App</string>
     <string name="q1">Is your name is adarsh.</string>
     <string name="q2">Is you are above 18.</string>
