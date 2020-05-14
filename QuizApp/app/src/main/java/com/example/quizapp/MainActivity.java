@@ -1,7 +1,9 @@
 package com.example.quizapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private int questionIndex;
     private  int questionQuiz;
     private int score;
+    private int attemptQuestions;
 
 //    This array is create for only use to structure and packaged data because we are not using database
 
@@ -74,8 +77,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateQuestion(){
 
-        quizStatsTextView.setText(String.valueOf(score));
+        attemptQuestions++;
+        quizStatsTextView.setText("Score : " + score + "/" + attemptQuestions);
         questionIndex = (questionIndex + 1) % quizQuestions.length;
+
+        if (questionIndex == 0){
+
+            AlertDialog.Builder quizAlert = new AlertDialog.Builder(this);
+            quizAlert.setCancelable(false);
+            quizAlert.setTitle("The quiz is finished");
+            quizAlert.setMessage("Your score is " + score + "/" + attemptQuestions);
+            quizAlert.setPositiveButton("Finsh the quiz", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    finish();
+                }
+            });
+
+            quizAlert.show();
+        }
         questionQuiz = quizQuestions[questionIndex].getmQuestion();
         questionTextView.setText(questionQuiz);
         quizPB.incrementProgressBy(USER_PROGRESS);
