@@ -4,7 +4,15 @@
 
 
     <string name="app_name">Quiz App</string>
-    <string name="q1">Is your name is adarsh.</string>
-    <string name="q2">Is you are above 18.</string>
-    <string name="q3">Can you do programming.</string>
+    <string name="q1">Electrons are larger than molecules.</string>
+    <string name="q2">The Atlantic Ocean is the biggest ocean on Earth.</string>
+    <string name="q3">The chemical make up food often changes when you cook it.</string>
+    <string name="q4"> Sharks are mammals.</string>
+    <string name="q5">The human body has four lungs.</string>
+    <string name="q6">Atoms are most stable when their outer shells are full.</string>
+    <string name="q7">Filtration separates mixtures based upon their particle size.</string>
+    <string name="q8">Venus is the closest planet to the Sun.</string>
+    <string name="q9">Conductors have low resistance.</string>
+    <string name="q10"> Molecules can have atoms from more than one chemical element.</string>
+
 </resources>
