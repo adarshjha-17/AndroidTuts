@@ -1,10 +1,12 @@
 package com.example.quizapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private  int questionQuiz;
     private int score;
     private int attemptQuestions;
+    final String SCORE_KEY = "SCORE";
+    final String QUESTION_INDEX_KEY = "QUESTIONINDEX";
+    final String ATTEMPT_QUESTIONS_KEY = "ATTEMPTQUESTONS";
 
 //    This array is create for only use to structure and packaged data because we are not using database
 
@@ -47,6 +52,22 @@ public class MainActivity extends AppCompatActivity {
         questionTextView = findViewById(R.id.questionTextView);
         quizStatsTextView = findViewById(R.id.quizStatsTextView);
         quizPB = findViewById(R.id.quizPB);
+
+
+        if (savedInstanceState != null){
+
+            score = savedInstanceState.getInt(SCORE_KEY);
+            attemptQuestions = savedInstanceState.getInt(ATTEMPT_QUESTIONS_KEY);
+            questionIndex = savedInstanceState.getInt(QUESTION_INDEX_KEY);
+            quizStatsTextView.setText("Score : " + score + "/" + attemptQuestions);
+        }
+        else{
+
+            score = 0;
+            attemptQuestions = 0;
+            questionIndex = 0;
+
+        }
 
 //        Object created to access the data
         QuizModel q1 = quizQuestions[0];
@@ -116,5 +137,49 @@ public class MainActivity extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(),R.string.wrong_answer_toast,Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Toast.makeText(this, "Onstart method", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "Onresume method", Toast.LENGTH_LONG).show();
+    }
+
+
+    // used to save critical data
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Toast.makeText(this,"Onpause method",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Toast.makeText(this, "Onstop method", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "Ondestroy method", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+        outState.putInt(SCORE_KEY,score);
+        outState.putInt(QUESTION_INDEX_KEY,questionIndex);
+        outState.putInt(ATTEMPT_QUESTIONS_KEY,attemptQuestions);
     }
 }
